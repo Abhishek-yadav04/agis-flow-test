@@ -9,10 +9,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./frontend/src"),
     },
   },
-  root: '.',
-  publicDir: 'frontend/public',
+  root: './frontend',
+  publicDir: 'public',
   build: {
-    outDir: 'dist',
+    outDir: '../dist',
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
@@ -22,7 +22,7 @@ export default defineConfig({
     }
   },
   server: {
-    port: 3000,
+    port: 8080,
     host: true,
     proxy: {
       '/api': {
