@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 100
+extend-exclude = ["backend/venv", "backend/__pycache__"]
+
+[tool.ruff.lint]
+# Temporarily ignore unused imports; address remaining rules
+extend-ignore = ["F401"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+exclude = ["backend/venv", "backend/__pycache__"]

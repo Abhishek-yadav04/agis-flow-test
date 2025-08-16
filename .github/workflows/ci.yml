@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_dev.txt
+
+      - name: Lint (ruff)
+        run: |
+          ruff check backend
+
+      - name: Type check (mypy)
+        run: |
+          mypy backend || true
+
+      - name: Security scan (bandit)
+        run: |
+          bandit -r backend -q || true
+
+      - name: Dependency audit (pip-audit)
+        run: |
+          pip-audit -r backend/requirements_production.txt || true
+
+      - name: Run tests
+        env:
+          PYTHONPATH: backend
+        run: |
+          pytest -q --maxfail=1 --disable-warnings --cov=backend --cov-report=xml --cov-report=term
+
+      - name: Enforce coverage threshold
+        run: |
+          python - << 'PY'
+          import sys, xml.etree.ElementTree as ET
+          tree = ET.parse('coverage.xml')
+          cov = float(tree.getroot().get('line-rate', '0')) * 100
+          threshold = 80.0
+          print(f"Coverage: {cov:.2f}% (threshold {threshold}%)")
+          if cov < threshold:
+              sys.exit(1)
+          PY
+
+      - name: Upload coverage.xml
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml

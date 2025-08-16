@@ -1,0 +1,149 @@
+################################################################################
+# AgisFL Enterprise .gitignore (Consolidated & Enhanced)
+################################################################################
+
+### Python Core ###
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+pip-wheel-metadata/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.nox/
+.tox/
+.hypothesis/
+.benchmarks/
+*.tsbuildinfo
+
+### Virtual Envs / Environment Files ###
+venv/
+env/
+.venv/
+.env
+.env.*
+.envrc
+.python-version
+
+### Logs / Runtime Artifacts ###
+logs/**
+!logs/.gitkeep
+*.log
+*.ndjson
+*.pid
+*.db
+*.sqlite3
+*.sqlite
+
+### Coverage / Testing ###
+.coverage*
+coverage.xml
+htmlcov/
+pytestdebug.log
+
+### Jupyter / Notebooks ###
+.ipynb_checkpoints/
+*.ipynb
+
+### Data / Datasets / Exports ###
+data/**
+!data/*.example
+datasets/**
+!datasets/README.md
+!datasets/*.md
+exports/**
+backend/static/generated/**
+
+### Model / ML Artifacts ###
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.onnx
+*.joblib
+*.pkl
+*.npz
+*.npy
+mlruns/
+wandb/
+.cache/
+cache/
+.huggingface/
+
+### Node / Frontend ###
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite-cache/
+frontend/.pnpm-debug.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+### Electron / Desktop Build Artifacts ###
+electron/dist/
+electron/out/
+dist-electron/
+*.asar
+
+### OS / Editor / Tooling ###
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.orig
+*.rej
+.idea/
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.example.json
+*.code-workspace
+
+### Secrets / Certificates ###
+secrets.*
+*.key
+*.pem
+*.crt
+*.cer
+*.der
+*.pfx
+*.p12
+
+### Generated Frontend Bundle Inside Backend (if any) ###
+backend/frontend/dist/
+
+### Temporary / Misc ###
+tmp/
+temp/
+*.tmp
+*.bak
+*.cache
+~$*
+node_modules/
+
+### Ignore local database snapshots but allow migrations/scripts ###
+db_dumps/
+
+################################################################################
+# NOTES:
+# - datasets/ is ignored to avoid large sample files; README & docs still tracked.
+# - Add a small placeholder file (e.g. .gitkeep) in empty folders you want preserved.
+# - Remove patterns above deliberately if you decide to version trained models.
+# - To keep a specific dataset: add an exception rule (e.g. !datasets/sample_small.csv).
+################################################################################
+
